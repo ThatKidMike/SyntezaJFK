@@ -6,7 +6,7 @@ namespace AnotherOne {
 
         public static void Main() {
 
-
+            int x = 0;
 
         }
 
@@ -16,7 +16,6 @@ namespace AnotherOne {
         int MyMethod(int z) {
             string bla = "smth";
             while (bla == "name") {
-                Console.WriteLine("..");
             }
             if (boolean == true) {
                 z = 10;

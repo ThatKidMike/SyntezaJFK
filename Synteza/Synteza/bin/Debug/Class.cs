@@ -6,14 +6,16 @@ namespace AnotherOne {
 
         public static void Main() {
 
+            int x = 0;
+
         }
+
 
         bool boolean = false;
         const int w = 2;
         int MyMethod(int z) {
             string bla = "smth";
             while (bla == "name") {
-                Console.WriteLine("..");
             }
             if (boolean == true) {
                 z = 10;
