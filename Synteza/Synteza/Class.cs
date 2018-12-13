@@ -7,6 +7,8 @@ namespace AnotherOne {
         public static void Main() {
 
             int x = 0;
+            Console.WriteLine("Done: " + x);
+            Console.ReadLine();
 
         }
 
