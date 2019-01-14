@@ -6,9 +6,7 @@ namespace AnotherOne {
 
         public static void Main() {
 
-            int x = 0;
-            Console.WriteLine("Done: " + x);
-            Console.ReadLine();
+            int x;
 
         }
 
@@ -18,6 +16,7 @@ namespace AnotherOne {
         int MyMethod(int z) {
             string bla = "smth";
             while ("name" == bla) {
+                Console.WriteLine("..");
             }
             if (true == boolean) {
                 z = 10;
@@ -44,6 +43,47 @@ namespace AnotherOne {
             }
 
             if (6 == x) {
+            } 
+
+            if(7 != y) {
+
+            }
+
+            if(y == 6 + x + 7 + w + h + 23) {
+
+            }
+
+            if("abc" + w != y) {
+
+            }
+
+            if ("Rasd" == "asd" + f) {
+
+            }
+
+
+            if ("abc" + 4 + 6 + 5 + "cda" != ff) {
+
+            }
+
+            if (ff != "abc" + 4 + 6 + 5 + "cda" + ef) {
+
+            }
+
+            if (6 + 3 + 2 + 3 + 4 + 5 + 7 + 8 == u) {
+
+            }
+
+            if(2 + 3 == i) {
+
+            }
+
+            if ("abc" + "wfg" != t) {
+
+            }
+
+            if("abc" + "wfg" + "wewew" != t) {
+
             }
 
         }

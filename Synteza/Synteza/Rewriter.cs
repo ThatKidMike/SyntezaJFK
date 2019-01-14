@@ -1,5 +1,6 @@
 ﻿namespace Synteza {
 
+    using System.Collections.Generic;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -10,13 +11,27 @@
 
             if (node.Kind() == SyntaxKind.EqualsExpression) {
 
-                BinaryExpressionSyntax equalsExpression = node;
-               
-                if (equalsExpression.GetFirstToken().Kind() == SyntaxKind.IdentifierToken
-                    && equalsExpression.GetLastToken().Kind() != SyntaxKind.IdentifierToken) {
+                bool wasVariableInside = false;
+
+                ExpressionSyntax equalsExpressionRight = node.Right;
+
+                IEnumerable<SyntaxNode> list = equalsExpressionRight.DescendantNodesAndSelf();
+
+                foreach(SyntaxNode n in list) {
+
+                    if(n is IdentifierNameSyntax) {
+
+                        //Console.WriteLine(n.ToString());
+                        wasVariableInside = true;
+
+                    } 
+
+                }          
+                  
+                if (!wasVariableInside) {
                 
                     ExpressionSyntax left = node.Left.WithoutTrailingTrivia();
-                    ExpressionSyntax right = node.Right.WithTrailingTrivia(equalsExpression.GetFirstToken().TrailingTrivia);
+                    ExpressionSyntax right = node.Right.WithTrailingTrivia(node.GetFirstToken().TrailingTrivia);
                     SyntaxToken sign = node.OperatorToken;
 
                     node = node.ReplaceNode(node, SyntaxFactory.BinaryExpression
@@ -25,7 +40,40 @@
                 }
                    
               
+            } else if(node.Kind() == SyntaxKind.NotEqualsExpression)  {
+
+                ExpressionSyntax notEqualsExpressionRight = node.Right;
+
+                bool wasVariableInside = false;
+
+                IEnumerable<SyntaxNode> list = notEqualsExpressionRight.DescendantNodesAndSelf();
+
+
+                foreach (SyntaxNode n in list) {
+
+                        if (n is IdentifierNameSyntax) {
+
+                            //Console.WriteLine(n.ToString());
+                            wasVariableInside = true;
+
+                        }
+
+                    }
+
+                if (!wasVariableInside) {
+
+                    ExpressionSyntax left = node.Left.WithoutTrailingTrivia();
+                    ExpressionSyntax right = node.Right.WithTrailingTrivia(node.GetFirstToken().TrailingTrivia);
+                    SyntaxToken sign = node.OperatorToken;
+
+                    node = node.ReplaceNode(node, SyntaxFactory.BinaryExpression
+                        (SyntaxKind.EqualsExpression, right, sign, left));
+
+                }
+
+
             }
+
             return base.VisitBinaryExpression(node);
         }
 
